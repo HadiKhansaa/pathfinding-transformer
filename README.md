@@ -104,7 +104,7 @@ The project is structured around several key scripts. Example Slurm submission s
     *   An example `run_hpt.sh` would execute this script.
 
 ## File Structure
-
+```
 pathfinding-transformer/
 ├── requirements.txt # Python dependencies
 ├── config.py # Central configuration for parameters
@@ -126,7 +126,7 @@ pathfinding-transformer/
 └── logs/ # Directory for storing Slurm log files (created by script)
 └── (Optional) hpt.py # Script for hyperparameter optimization
 └── (Optional) run_hpt.sh # Example Slurm script for HPT
-
+```
 
 ## Configuration
 
