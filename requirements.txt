@@ -1,0 +1,6 @@
+torch
+numpy
+matplotlib
+tqdm
+optuna # If using for HPT
+scipy # Often useful, might be needed indirectly

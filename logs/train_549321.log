@@ -1,0 +1,7 @@
+Setting up environment...
+Starting training run...
+  File "train.py", line 105
+    print(f"Looked for: {train_data_path}, {val_data_path}")
+                                                          ^
+SyntaxError: invalid syntax
+Training script finished.

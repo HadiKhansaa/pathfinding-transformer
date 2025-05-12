@@ -1,0 +1,7 @@
+Setting up environment...
+Starting training run...
+  File "train.py", line 89
+    print(f"Arguments: {args}")
+                             ^
+SyntaxError: invalid syntax
+Training script finished.
