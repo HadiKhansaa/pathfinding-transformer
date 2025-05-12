@@ -31,7 +31,7 @@ The model is trained via supervised learning (behavioral cloning) on data genera
 
 1.  **Clone the repository:**
     ```bash
-    git clone <your-repo-url>
+    git clone <[your-repo-url](https://github.com/HadiKhansaa/pathfinding-transforme)>
     cd pathfinding-transformer
     ```
 
