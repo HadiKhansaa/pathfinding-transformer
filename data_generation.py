@@ -23,7 +23,7 @@ def get_map_files(directory):
     print(f"Found {len(map_files)} game map files in {expanded_dir}.")
     return map_files
 
-def generate_trajectory_on_env(grid_env, num_trajectories_per_env=1, min_dist_factor=0.1):
+def generate_trajectory_on_env(grid_env, num_trajectories_per_env=1, min_dist_factor=0.1): # Parameter name is correct here
     """
     Generates a specified number of A* trajectories for a given environment instance.
     Returns a list of state-action pairs from all successful trajectories.
@@ -31,11 +31,11 @@ def generate_trajectory_on_env(grid_env, num_trajectories_per_env=1, min_dist_fa
     trajectories_from_this_env = []
     successful_paths = 0
     for _ in range(num_trajectories_per_env):
-        # Determine min_dist based on actual grid dimensions
-        current_h, current_w = grid_env.grid.shape
-        min_dist = max(1, int(min(current_h, current_w) * min_dist_factor))
+        # The min_dist calculation is now inside get_random_start_goal_pair
+        # We just need to pass the factor.
 
-        start_node, goal_node = grid_env.get_random_start_goal_pair(min_dist=min_dist)
+        # Corrected call:
+        start_node, goal_node = grid_env.get_random_start_goal_pair(min_dist_factor=min_dist_factor)
 
         if start_node is None or goal_node is None:
             # print(f"Could not find valid S/G for current env. Skipping one trajectory.")
@@ -54,10 +54,7 @@ def generate_trajectory_on_env(grid_env, num_trajectories_per_env=1, min_dist_fa
                 dc = next_pos[1] - current_pos[1]
                 action_idx = delta_to_action(dr, dc)
                 trajectories_from_this_env.append((state, action_idx))
-    # if successful_paths > 0:
-        # print(f"Generated {successful_paths} paths for an environment of size {grid_env.grid.shape}")
     return trajectories_from_this_env
-
 
 def generate_and_save_data_combined(
     dataset_type="train", # "train" or "val"
