@@ -24,7 +24,7 @@ mkdir -p logs
 # Run the training script with specific arguments
 # Example: Train with default config values
 python train.py \
-    --epochs 50 \
+    --epochs 20 \
     --batch_size 128 \
     --lr 1e-4 \
     --patch_size 11 \
@@ -34,6 +34,8 @@ python train.py \
     --num_layers 4 \
     --d_ff 256 \
     --dropout 0.1 \
+    --train_data_file "combined_train_data_train.pkl" \
+    --val_data_file "combined_val_data_val.pkl" \
     # --resume # Add this flag to resume from checkpoint
 
 # Example: Train a slightly larger model

@@ -13,13 +13,43 @@ ACTION_COSTS = [1, np.sqrt(2), 1, np.sqrt(2), 1, np.sqrt(2), 1, np.sqrt(2)]
 PATCH_SIZE = 11           # Size of the local patch (must be odd)
 PATCH_PADDING_VALUE = 1   # Value to use for padding patches (1=obstacle)
 
+
+
 # --- Data Generation ---
-NUM_TRAIN_TRAJECTORIES = 20000 # Number of A* paths for training data (adjust based on time)
-NUM_VAL_TRAJECTORIES = 2000   # Number of A* paths for validation data
-NUM_TEST_ENVIRONMENTS = 500    # Number of environments for final testing
+# ...
 EXPERT_DATA_DIR = "expert_data" # Directory to save/load generated data
-TRAIN_DATA_FILE = f"{EXPERT_DATA_DIR}/train_trajectories_{TARGET_GRID_SIZE}x{TARGET_GRID_SIZE}.pkl"
-VAL_DATA_FILE = f"{EXPERT_DATA_DIR}/val_trajectories_{TARGET_GRID_SIZE}x{TARGET_GRID_SIZE}.pkl"
+# Filenames will now be more dynamic if game maps are included
+# TRAIN_DATA_FILE = f"{EXPERT_DATA_DIR}/train_trajectories_{TARGET_GRID_SIZE}x{TARGET_GRID_SIZE}.pkl"
+# VAL_DATA_FILE = f"{EXPERT_DATA_DIR}/val_trajectories_{TARGET_GRID_SIZE}x{TARGET_GRID_SIZE}.pkl"
+
+# --- Game Map Data for Training ---
+USE_GAME_MAPS_FOR_TRAINING = True       # Set to True to include game maps in training data
+GAME_MAPS_DATA_DIR = "~/Datasets/a_star_maps/" # Path to the root of game map files
+GAME_MAPS_TRAIN_RATIO = 0.8             # 80% of game maps for training, rest for validation
+# How many A* trajectories (S/G pairs) to generate PER selected game map for training/validation
+TRAJECTORIES_PER_GAME_MAP = 10
+
+# --- Randomly Generated Data for Training ---
+# These are still used if USE_GAME_MAPS_FOR_TRAINING is True, they get combined.
+# If USE_GAME_MAPS_FOR_TRAINING is False, these are the only source.
+USE_RANDOM_MAPS_FOR_TRAINING = True     # Whether to also generate random/maze maps
+NUM_RANDOM_TRAIN_ENVS = 5000          # Number of random/maze ENVIRONMENTS for training data
+NUM_RANDOM_VAL_ENVS = 500             # Number of random/maze ENVIRONMENTS for validation data
+# Note: NUM_TRAIN_TRAJECTORIES and NUM_VAL_TRAJECTORIES are effectively replaced by
+# (NUM_RANDOM_TRAIN_ENVS * avg_states_per_env) + (num_selected_game_maps * TRAJECTORIES_PER_GAME_MAP * avg_states_per_env)
+
+# --- Model ---
+# ...
+# COORD_VOCAB_SIZE needs to be large enough for the BIGGEST game map if training on them.
+# Set this manually to a safe upper bound, or determine it dynamically in data_generation.
+# For now, let's assume game maps can be up to, say, 512x512 for this example.
+# You MUST adjust this based on your actual largest game map dimension.
+MAX_EXPECTED_GAME_MAP_DIM = 1260
+# If training on game maps, the model_coord_size should reflect this.
+# The 'TARGET_GRID_SIZE' is more for the randomly generated grids.
+MODEL_COORD_VOCAB_SIZE = MAX_EXPECTED_GAME_MAP_DIM if USE_GAME_MAPS_FOR_TRAINING else TARGET_GRID_SIZE
+
+
 
 # --- Model ---
 # Transformer Hyperparameters (can be tuned)
