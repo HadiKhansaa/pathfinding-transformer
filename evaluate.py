@@ -169,14 +169,20 @@ def run_evaluation(args):
         pbar.set_description(f"Evaluating: {env_info['name'][:30]}")
 
         if env_info["source"] == "game_map":
-            test_env = GridEnvironment(size=env_info["grid_h"], grid_data=env_info["grid_data"]) # Size is from map
-            start_node, goal_node = get_random_start_goal_for_map(test_env.grid)
+            # Pass height and width explicitly if available and grid_data is used
+            test_env = GridEnvironment(grid_data=env_info["grid_data"],
+                                    height=env_info["grid_h"], # Parsed from map file
+                                    width=env_info["grid_w"])  # Parsed from map file
+            start_node, goal_node = get_random_start_goal_for_map(test_env.grid) # Use helper for map arrays
             num_scenarios_attempted_on_maps +=1
         else: # source == "generated"
-            test_env = GridEnvironment(size=args.eval_grid_size, obstacle_density=args.obstacle_density)
-            if args.use_maze_generation:
-                test_env.grid = test_env.generate_maze()
-            start_node, goal_node = test_env.get_random_start_goal_pair(min_dist=args.eval_grid_size * 0.1)
+            # For generated grids, pass eval_grid_size as both height and width if it's meant to be square
+            test_env = GridEnvironment(height=args.eval_grid_size,
+                                    width=args.eval_grid_size, # Assuming square for random/maze generation
+                                    obstacle_density=args.obstacle_density)
+            if args.eval_mode == "maze": # use_maze_generation consolidated into eval_mode
+                test_env.grid = test_env.generate_maze() # generate_maze now uses self.height/width
+            start_node, goal_node = test_env.get_random_start_goal_pair() # Use class method
 
         if start_node is None or goal_node is None:
             metrics["astar"]["failures"] += 1
