@@ -27,13 +27,14 @@ python train.py \
     --epochs 20 \
     --batch_size 128 \
     --lr 1e-4 \
-    --patch_size 11 \
-    --grid_size 100 \
-    --embed_dim 128 \
+    --patch_size 15 \
+    # --grid_size 100 \
+    --embed_dim 256 \
     --num_heads 8 \
-    --num_layers 4 \
-    --d_ff 256 \
+    --num_layers 6 \
+    --d_ff 512 \
     --dropout 0.1 \
+    --model_coord_vocab_size 1261
     --train_data_file "combined_train_data_train.pkl" \
     --val_data_file "combined_val_data_val.pkl" \
     # --resume # Add this flag to resume from checkpoint

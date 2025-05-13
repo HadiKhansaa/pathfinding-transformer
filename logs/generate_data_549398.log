@@ -1,0 +1,26 @@
+Setting up environment...
+Starting data generation...
+Using device: cuda
+Target Grid Size: 100x100
+Patch Size: 11x11
+Model Sequence Length: 123
+Coordinate Vocab Size: 100
+Found 565 game map files in /home/hma153/Datasets/a_star_maps.
+Total game maps: 565
+Using 452 game maps for training set.
+Using 113 game maps for validation set.
+
+--- Generating Training Data ---
+Generating train data:   0%|          | 0/5452 [00:00<?, ?it/s]Generating train data:   0%|          | 0/5452 [00:00<?, ?it/s, Map: den400d.map]Processing 452 game maps for train set...
+Traceback (most recent call last):
+  File "/scratch/p8190783-hma153/pathfinding-transformer/data_generation.py", line 173, in <module>
+    generate_and_save_data_combined(
+  File "/scratch/p8190783-hma153/pathfinding-transformer/data_generation.py", line 95, in generate_and_save_data_combined
+    trajs = generate_trajectory_on_env(env_game_map, trajectories_per_game_map)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/p8190783-hma153/pathfinding-transformer/data_generation.py", line 38, in generate_trajectory_on_env
+    start_node, goal_node = grid_env.get_random_start_goal_pair(min_dist=min_dist)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: GridEnvironment.get_random_start_goal_pair() got an unexpected keyword argument 'min_dist'
+Generating train data:   0%|          | 0/5452 [00:00<?, ?it/s, Map: den400d.map]
+Data generation script finished.

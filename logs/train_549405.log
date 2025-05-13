@@ -1,0 +1,20 @@
+Setting up environment...
+Starting training run...
+Using device: cuda
+Target Grid Size: 100x100
+Patch Size: 11x11
+Model Sequence Length: 123
+Coordinate Vocab Size: 100
+Starting Training Process...
+Arguments: Namespace(epochs=20, batch_size=128, lr=0.0001, patch_size=15, grid_size=100, embed_dim=128, num_heads=8, num_layers=4, d_ff=256, dropout=0.1, data_dir='expert_data', model_dir='trained_models', resume=False, no_validate=False)
+Loading data...
+Traceback (most recent call last):
+  File "/scratch/p8190783-hma153/pathfinding-transformer/train.py", line 244, in <module>
+    main(args)
+  File "/scratch/p8190783-hma153/pathfinding-transformer/train.py", line 97, in main
+    train_data_path = os.path.join(args.data_dir, os.path.basename(config.TRAIN_DATA_FILE)) # Construct path
+                                                                   ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'config' has no attribute 'TRAIN_DATA_FILE'
+/var/spool/slurm/d/job549405/slurm_script: line 32: --embed_dim: command not found
+/var/spool/slurm/d/job549405/slurm_script: line 38: --train_data_file: command not found
+Training script finished.

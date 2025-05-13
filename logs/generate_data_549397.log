@@ -1,0 +1,7 @@
+Setting up environment...
+Starting data generation...
+  File "data_generation.py", line 20
+    print(f"Error: Game map directory not found: {expanded_dir}")
+                                                               ^
+SyntaxError: invalid syntax
+Data generation script finished.
