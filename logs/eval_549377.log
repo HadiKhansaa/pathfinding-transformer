@@ -1,0 +1,41 @@
+Setting up environment...
+Starting evaluation run...
+/scratch/p8190783-hma153/pathfinding-transformer/planner.py:32: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  self.model.load_state_dict(torch.load(model_path, map_location=device))
+Using device: cuda
+Target Grid Size: 100x100
+Patch Size: 11x11
+Model Sequence Length: 123
+Coordinate Vocab Size: 100
+
+--- Running Evaluation ---
+Args: Namespace(num_cases=10, grid_size=1000, patch_size=11, obstacle_density=0.3, use_maze=True, model_path='trained_models/model_best.pth', max_steps=10000, results_dir='evaluation_results/run3')
+Initializing planner with patch size 11 and target grid 1000x1000
+Transformer model loaded successfully from trained_models/model_best.pth
+Evaluating on 10 test cases (Grid: 1000x1000, Obstacles: 0.3, Maze: True)
+  0%|          | 0/10 [00:00<?, ?it/s] 10%|█         | 1/10 [00:01<00:11,  1.26s/it] 10%|█         | 1/10 [00:03<00:11,  1.26s/it, A* OK=1, TF OK=1, TF Stuck=0, TF Steps=0] 20%|██        | 2/10 [00:03<00:13,  1.68s/it, A* OK=1, TF OK=1, TF Stuck=0, TF Steps=0] 20%|██        | 2/10 [00:04<00:13,  1.68s/it, A* OK=2, TF OK=2, TF Stuck=0, TF Steps=0] 30%|███       | 3/10 [00:04<00:10,  1.44s/it, A* OK=2, TF OK=2, TF Stuck=0, TF Steps=0] 30%|███       | 3/10 [00:05<00:10,  1.44s/it, A* OK=3, TF OK=3, TF Stuck=0, TF Steps=0] 40%|████      | 4/10 [00:05<00:08,  1.36s/it, A* OK=3, TF OK=3, TF Stuck=0, TF Steps=0] 40%|████      | 4/10 [00:06<00:08,  1.36s/it, A* OK=4, TF OK=4, TF Stuck=0, TF Steps=0] 50%|█████     | 5/10 [00:06<00:06,  1.27s/it, A* OK=4, TF OK=4, TF Stuck=0, TF Steps=0] 50%|█████     | 5/10 [00:07<00:06,  1.27s/it, A* OK=5, TF OK=5, TF Stuck=0, TF Steps=0] 60%|██████    | 6/10 [00:07<00:04,  1.21s/it, A* OK=5, TF OK=5, TF Stuck=0, TF Steps=0] 60%|██████    | 6/10 [00:09<00:04,  1.21s/it, A* OK=6, TF OK=6, TF Stuck=0, TF Steps=0] 70%|███████   | 7/10 [00:09<00:03,  1.26s/it, A* OK=6, TF OK=6, TF Stuck=0, TF Steps=0] 70%|███████   | 7/10 [00:10<00:03,  1.26s/it, A* OK=7, TF OK=7, TF Stuck=0, TF Steps=0] 80%|████████  | 8/10 [00:10<00:02,  1.24s/it, A* OK=7, TF OK=7, TF Stuck=0, TF Steps=0] 90%|█████████ | 9/10 [00:11<00:01,  1.24s/it, A* OK=7, TF OK=7, TF Stuck=0, TF Steps=0] 90%|█████████ | 9/10 [00:12<00:01,  1.24s/it, A* OK=8, TF OK=8, TF Stuck=0, TF Steps=0]100%|██████████| 10/10 [00:12<00:00,  1.26s/it, A* OK=8, TF OK=8, TF Stuck=0, TF Steps=0]100%|██████████| 10/10 [00:12<00:00,  1.29s/it, A* OK=8, TF OK=8, TF Stuck=0, TF Steps=0]
+Warning: Could not find suitable start/goal pair after 100 attempts.
+Warning: Could not find suitable start/goal pair after 100 attempts.
+
+--- Evaluation Results Summary ---
+Total Test Cases Attempted: 10
+Valid Start/Goal Pairs Found: 6
+
+A* Success Rate (on valid): 133.33% (8/6)
+  Avg A* Path Length: 86.75
+  Avg A* Nodes Expanded: 286.75
+  Avg A* Time: 7.89 ms
+
+Transformer Success Rate (on valid): 133.33% (8/6)
+  Avg Transformer Path Length: 98.25
+  Avg Transformer Steps Taken: 98.25
+  Avg Transformer Time: 390.04 ms
+  Path Length Ratio (Transformer/A* on common successes): 1.129
+  Transformer Failures (Stuck): 0
+  Transformer Failures (Max Steps): 0
+  Transformer Failures (Invalid S/G): 2
+
+Detailed evaluation results saved to evaluation_results/run3/evaluation_results_1000x1000_maze.pkl
+Comparison plot saved to evaluation_results/run3/comparison_bar_chart_1000x1000_maze.png
+/var/spool/slurm/d/job549377/slurm_script: line 33: --no_maze: command not found
+Evaluation script finished.
