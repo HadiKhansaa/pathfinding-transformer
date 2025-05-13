@@ -31,6 +31,10 @@ def parse_args():
     parser.add_argument('--model_dir', type=str, default=config.MODEL_SAVE_DIR, help='Directory to save models')
     parser.add_argument('--resume', action='store_true', help='Resume training from latest checkpoint')
     parser.add_argument('--no_validate', action='store_true', help='Skip validation loop during training')
+    parser.add_argument('--train_data_file', type=str, default="combined_train_data_train.pkl", help='Name of the training data .pkl file in data_dir')
+    parser.add_argument('--val_data_file', type=str, default="combined_val_data_val.pkl", help='Name of the validation data .pkl file in data_dir')
+    # Add arg for model_coord_vocab_size if you want to override config from command line
+    parser.add_argument('--model_coord_vocab_size', type=int, default=config.MODEL_COORD_VOCAB_SIZE, help='Max coordinate vocab size for the model embeddings.')
      # Add more arguments as needed for HPT or specific runs
     return parser.parse_args()
 
@@ -94,8 +98,9 @@ def main(args):
 
     # --- Load Data ---
     print("Loading data...")
-    train_data_path = os.path.join(args.data_dir, os.path.basename(config.TRAIN_DATA_FILE)) # Construct path
-    val_data_path = os.path.join(args.data_dir, os.path.basename(config.VAL_DATA_FILE))
+    # Use args for filenames
+    train_data_path = os.path.join(args.data_dir, args.train_data_file)
+    val_data_path = os.path.join(args.data_dir, args.val_data_file)
 
     train_trajectory_data = load_data(train_data_path)
     val_trajectory_data = load_data(val_data_path)
@@ -108,9 +113,9 @@ def main(args):
 
     # --- Create Datasets and DataLoaders ---
     # Use args for patch_size and grid_size passed to dataset
-    train_dataset = PathfindingPatchDataset(train_trajectory_data, args.patch_size, args.grid_size)
-    val_dataset = PathfindingPatchDataset(val_trajectory_data, args.patch_size, args.grid_size)
-
+    train_dataset = PathfindingPatchDataset(train_trajectory_data, args.patch_size, args.model_coord_vocab_size)
+    val_dataset = PathfindingPatchDataset(val_trajectory_data, args.patch_size, args.model_coord_vocab_size)
+    
     train_loader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, num_workers=4, pin_memory=True)
     val_loader = DataLoader(val_dataset, batch_size=args.batch_size, shuffle=False, num_workers=4, pin_memory=True)
     print(f"Training samples: {len(train_dataset)}, Validation samples: {len(val_dataset)}")
@@ -123,7 +128,7 @@ def main(args):
     config.D_FF = args.d_ff
     config.DROPOUT = args.dropout
     config.PATCH_SIZE = args.patch_size
-    config.COORD_VOCAB_SIZE = args.grid_size
+    config.COORD_VOCAB_SIZE = args.model_coord_vocab_size
     config.MODEL_MAX_SEQ_LEN = (args.patch_size * args.patch_size) + 2
 
     model = create_model() # Uses updated config values
