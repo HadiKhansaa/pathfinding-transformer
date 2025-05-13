@@ -77,6 +77,7 @@ BEST_MODEL_FILE = f"{MODEL_SAVE_DIR}/model_best.pth"
 # --- Evaluation ---
 MAX_PLANNER_STEPS = TARGET_GRID_SIZE * TARGET_GRID_SIZE # Max steps for transformer planner
 EVAL_RESULTS_DIR = "evaluation_results"
+NUM_TEST_ENVIRONMENTS = 200
 
 # --- Assertions ---
 assert PATCH_SIZE % 2 == 1, "PATCH_SIZE must be odd"
