@@ -1,0 +1,15 @@
+Setting up environment...
+Starting demo run...
+Running Python demo script...
+Using device: cuda
+Target Grid Size: 100x100
+Patch Size: 11x11
+Model Sequence Length: 123
+Coordinate Vocab Size: 100
+Demo using device: cuda
+Loading map from: /home/hma153/Datasets/a_star_maps/dao-map/brc999d.map
+Map loaded: 512x518
+Attempting to find random start/goal (min_dist_factor=0.3)...
+Could not find valid start/goal for the demo on this map.
+Demo script finished. Plot saved to demo_output/demo_plot_550068.png
+Check Slurm log: logs/demo_slurm_550068.log

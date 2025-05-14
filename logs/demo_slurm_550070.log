@@ -1,0 +1,24 @@
+Setting up environment...
+Starting demo run...
+Running Python demo script...
+Using device: cuda
+Target Grid Size: 100x100
+Patch Size: 11x11
+Model Sequence Length: 123
+Coordinate Vocab Size: 100
+Demo using device: cuda
+Loading map from: /home/hma153/Datasets/a_star_maps/dao-map/arena2.map
+Map loaded: 209x281
+Attempting to find random start/goal (min_dist_factor=0.3)...
+Using Start: (np.int64(112), np.int64(198)), Goal: (np.int64(59), np.int64(275))
+
+Running A*...
+Traceback (most recent call last):
+  File "/scratch/p8190783-hma153/pathfinding-transformer/run_demo_slurm.py", line 132, in <module>
+    main(cli_args)
+  File "/scratch/p8190783-hma153/pathfinding-transformer/run_demo_slurm.py", line 57, in main
+    astar_path, astar_nodes_expanded_count, astar_expanded_nodes_set = a_star_search(demo_env, start_node, goal_node)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: not enough values to unpack (expected 3, got 2)
+Demo script finished. Plot saved to demo_output/demo_plot_550070.png
+Check Slurm log: logs/demo_slurm_550070.log

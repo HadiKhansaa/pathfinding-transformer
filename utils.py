@@ -142,6 +142,61 @@ def plot_grid_with_paths(grid_env, start, goal, astar_path=None, transformer_pat
     plt.show()
 
 
+
+
+def plot_grid_with_paths_and_explored(grid_env, start, goal, astar_path=None, transformer_path=None,
+                                      astar_expanded_nodes_set=None, transformer_visited_set=None,
+                                      title="Grid Comparison"):
+    grid_h, grid_w = grid_env.height, grid_env.width
+    cmap_list = ['white', 'black', 'salmon', 'lightgreen',
+                 'blue', 'cyan', 'magenta',
+                 'lightblue', 'lightcyan']
+    cmap = plt.cm.colors.ListedColormap(cmap_list)
+    bounds = [-0.5 + i for i in range(len(cmap_list) + 1)]
+    norm = plt.cm.colors.BoundaryNorm(bounds, cmap.N)
+
+    plot_grid = np.copy(grid_env.grid).astype(float)
+
+    if astar_expanded_nodes_set:
+        for r, c in astar_expanded_nodes_set:
+            if (r,c) != start and (r,c) != goal: plot_grid[r,c] = 7 # lightblue
+    if transformer_visited_set:
+        for r, c in transformer_visited_set:
+            if (r,c) != start and (r,c) != goal:
+                if plot_grid[r,c] != 7 : plot_grid[r,c] = 8 # lightcyan
+
+    if transformer_path:
+        for r,c in transformer_path:
+            if (r,c) != start and (r,c) != goal: plot_grid[r,c] = 5
+    if astar_path:
+        for r,c in astar_path:
+            if (r,c) != start and (r,c) != goal:
+                if plot_grid[r,c] == 5:
+                    plot_grid[r,c] = 6
+                else:
+                    plot_grid[r,c] = 4
+
+    if start: plot_grid[start] = 3
+    if goal:  plot_grid[goal] = 2
+
+    fig_w = max(8, grid_w / 10 if grid_w > 0 else 8) # Avoid division by zero if grid_w is 0
+    fig_h = max(8, grid_h / 10 if grid_h > 0 else 8) # Avoid division by zero if grid_h is 0
+    plt.figure(figsize=(fig_w, fig_h))
+    plt.imshow(plot_grid, cmap=cmap, norm=norm, interpolation='nearest')
+    ax = plt.gca()
+    ax.set_xticks(np.arange(-.5, grid_w, 1), minor=True)
+    ax.set_yticks(np.arange(-.5, grid_h, 1), minor=True)
+    ax.grid(which="minor", color="grey", linestyle='-', linewidth=0.2)
+    ax.tick_params(which="minor", size=0)
+
+    tick_step_w = max(1, grid_w // 15 if grid_w > 15 else 1)
+    tick_step_h = max(1, grid_h // 15 if grid_h > 15 else 1)
+    if grid_w > 0 : ax.set_xticks(np.arange(0, grid_w, tick_step_w))
+    if grid_h > 0 : ax.set_yticks(np.arange(0, grid_h, tick_step_h))
+    plt.title(title, fontsize=10)
+    # DO NOT CALL plt.show() in non-interactive script
+    # plt.savefig() will be called in run_demo_slurm.py
+
 # --- Tensor Handling ---
 def tensors_to_device(batch, device):
     """Moves a batch of tensors (or list/tuple of tensors) to the specified device."""

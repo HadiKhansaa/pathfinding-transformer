@@ -1,0 +1,6 @@
+Setting up environment...
+Starting evaluation run...
+  File "evaluate.py", line 90
+    print(f"\n--- Running Evaluation ---")
+                                        ^
+SyntaxError: invalid syntax

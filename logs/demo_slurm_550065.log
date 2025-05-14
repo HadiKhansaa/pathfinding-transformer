@@ -1,0 +1,22 @@
+Setting up environment...
+Starting demo run...
+Running Python demo script...
+Using device: cuda
+Target Grid Size: 100x100
+Patch Size: 11x11
+Model Sequence Length: 123
+Coordinate Vocab Size: 100
+Demo using device: cuda
+Loading map from: ~/Datasets/a_star_maps/dao-map/brc999d.map
+Traceback (most recent call last):
+  File "/scratch/p8190783-hma153/pathfinding-transformer/run_demo_slurm.py", line 132, in <module>
+    main(cli_args)
+  File "/scratch/p8190783-hma153/pathfinding-transformer/run_demo_slurm.py", line 24, in main
+    map_grid_array, map_h, map_w = parse_map_file(args.map_file)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/scratch/p8190783-hma153/pathfinding-transformer/evaluate.py", line 27, in parse_map_file
+    with open(filepath, 'r') as f:
+         ^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '~/Datasets/a_star_maps/dao-map/brc999d.map'
+Demo script finished. Plot saved to demo_output/demo_plot_550065.png
+Check Slurm log: logs/demo_slurm_550065.log

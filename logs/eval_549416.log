@@ -1,0 +1,21 @@
+Setting up environment...
+Starting evaluation run...
+Evaluating model: trained_models/model_best.pth
+Trained with patch size: 15, coord size: 1260
+Evaluation scenario tag: game_maps_s3
+Results will be saved in: evaluation_results/trained_models_on_game_maps_s3
+Executing: python evaluate.py     --model_path "trained_models/model_best.pth"     --model_patch_size 15     --model_coord_size 1260     --results_dir "evaluation_results/trained_models_on_game_maps_s3" --use-game-grids           --game_grids_dir "~/Datasets/a_star_maps/"           --num_scenarios_per_map 3 
+Using device: cuda
+Target Grid Size: 100x100
+Patch Size: 11x11
+Model Sequence Length: 123
+Coordinate Vocab Size: 100
+Traceback (most recent call last):
+  File "/scratch/p8190783-hma153/pathfinding-transformer/evaluate.py", line 390, in <module>
+    eval_args = parse_eval_args()
+                ^^^^^^^^^^^^^^^^^
+  File "/scratch/p8190783-hma153/pathfinding-transformer/evaluate.py", line 362, in parse_eval_args
+    parser.add_argument('--num_cases', type=int, default=config.NUM_TEST_ENVIRONMENTS, help='Number of random/maze test environments if not using --use-game-grids.')
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'config' has no attribute 'NUM_TEST_ENVIRONMENTS'
+Evaluation script finished.

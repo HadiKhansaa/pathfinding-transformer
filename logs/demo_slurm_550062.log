@@ -1,0 +1,9 @@
+Setting up environment...
+Starting demo run...
+Running Python demo script...
+  File "run_demo_slurm.py", line 22
+    print(f"Demo using device: {config.DEVICE}")
+                                              ^
+SyntaxError: invalid syntax
+Demo script finished. Plot saved to demo_output/demo_plot_550062.png
+Check Slurm log: logs/demo_slurm_550062.log

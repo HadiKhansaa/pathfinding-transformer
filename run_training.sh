@@ -25,15 +25,15 @@ mkdir -p logs
 # Example: Train with default config values
 python train.py \
     --epochs 20 \
-    --batch_size 128 \
-    --lr 1e-4 \
+    --batch_size 512 \
+    --lr 1e-5 \
     --patch_size 15 \
-    # --grid_size 100 \
+    # --grid_size 1261 \
     --embed_dim 256 \
-    --num_heads 8 \
-    --num_layers 6 \
+    --num_heads 6 \
+    --num_layers 4 \
     --d_ff 512 \
-    --dropout 0.1 \
+    --dropout 0.2 \
     --model_coord_vocab_size 1261
     --train_data_file "combined_train_data_train.pkl" \
     --val_data_file "combined_val_data_val.pkl" \

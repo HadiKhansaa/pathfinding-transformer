@@ -1,0 +1,14 @@
+Setting up environment...
+Starting demo run...
+Running Python demo script...
+Using device: cuda
+Target Grid Size: 100x100
+Patch Size: 11x11
+Model Sequence Length: 123
+Coordinate Vocab Size: 100
+Traceback (most recent call last):
+  File "/scratch/p8190783-hma153/pathfinding-transformer/run_demo_slurm.py", line 18, in <module>
+    from utils import plot_grid_with_paths_and_explored
+ImportError: cannot import name 'plot_grid_with_paths_and_explored' from 'utils' (/scratch/p8190783-hma153/pathfinding-transformer/utils.py)
+Demo script finished. Plot saved to demo_output/demo_plot_550063.png
+Check Slurm log: logs/demo_slurm_550063.log
