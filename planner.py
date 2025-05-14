@@ -20,6 +20,17 @@ class TransformerPlanner:
         self.max_coord_value = target_grid_size - 1
         self.device = device
 
+            # Temporarily set global config values so create_model() uses them
+        # This is a bit hacky but necessary if hparams aren't in the checkpoint
+        original_config_patch_size = config.PATCH_SIZE
+        original_config_coord_vocab_size = config.COORD_VOCAB_SIZE
+
+        config.PATCH_SIZE = self.patch_size
+        config.COORD_VOCAB_SIZE = self.target_grid_size
+        # You might need to also set other config values like EMBED_DIM, NUM_LAYERS etc.
+        # if they are not fixed or if create_model() solely relies on config.py
+        # For this quick fix, we assume other arch params in config.py are correct for the loaded model.
+
         print(f"Initializing planner with patch size {patch_size} and target grid {target_grid_size}x{target_grid_size}")
 
         # Create a model instance with the architecture used during training
